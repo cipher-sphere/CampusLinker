@@ -35,6 +35,6 @@ const adminSchema = new mongoose.Schema({
   });
 
   const User = mongoose.model('User', userSchema);
-  const Account = mongoose.model('Account', accountSchema);
+  const Admin = mongoose.model('Admin', adminSchema);
   
-  export { User, Account };
+  export { User, Admin };
