@@ -2,6 +2,7 @@ import express from 'express';
 import { User } from "../db.js";
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import { authenticateToken } from '../middleware/auth.js';
 const router = express.Router();
 const secret ="cipher"; // Better to use environment variable
 const saltRounds = 10; // You can adjust the number of salt rounds
@@ -95,6 +96,13 @@ router.post("/signin", async (req, res) => {
             error: error.message
         });
     }
+});
+
+router.get("/profile",authenticateToken,async (req,res)=>{
+    const user = await User.findById(req.user.userID).select("-password");
+    res.json({
+        user
+    });
 });
 
 export default router;
