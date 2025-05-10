@@ -14,8 +14,8 @@ function Hero() {
             <div className='container mx-auto px-4'>
                 <div className="flex items-center justify-between gap-16">
                     {/* Text Content */}
-                    <div className="max-w-xl text-xl">
-                        <h1 className="text-5xl font-bold text-gray-800 mb-6 leading-snug">
+                    <div className="max-w-3xl text-xl">
+                        <h1 className="text-5xl lg:text-6xl font-bold leading-tight text-gray-800 mb-6">
                             Connect Your <span className="text-blue-600">Campus Life</span> in One Place
                         </h1>
                         <p className="text-xl text-gray-600 mb-8">
