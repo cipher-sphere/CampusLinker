@@ -3,6 +3,7 @@ import Navbar from './landingcomponents/Navbar'
 import Features from './landingcomponents/Features'
 import Hero from './landingcomponents/Hero'
 import Testimonials from './landingcomponents/Testimonials'
+import Footer from './landingcomponents/Footer'
 function Landingpage() {
     return (
         <div className='font-sans'>
@@ -12,6 +13,7 @@ function Landingpage() {
                 <Features></Features>
                 <Testimonials></Testimonials>
             </main>
+            <Footer></Footer>
         </div>
     )
 }
