@@ -4,6 +4,7 @@ import Features from './landingcomponents/Features'
 import Hero from './landingcomponents/Hero'
 import Testimonials from './landingcomponents/Testimonials'
 import Footer from './landingcomponents/Footer'
+import Account from './landingcomponents/Account'
 function Landingpage() {
     return (
         <div className='font-sans'>
@@ -12,6 +13,7 @@ function Landingpage() {
                 <Hero></Hero>
                 <Features></Features>
                 <Testimonials></Testimonials>
+                <Account></Account>
             </main>
             <Footer></Footer>
         </div>
