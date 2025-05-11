@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+//to learn dashboard and account
 function Dashboard() {
   const [userData, setUserData] = useState({
     username: '',
@@ -30,7 +30,8 @@ function Dashboard() {
       
       setLoading(true);
       try {
-        const response = await axios.get("http://localhost:5000/api/v1/user/profile", {
+        // const response = await axios.get("http://localhost:5000/api/v1/user/profile", {
+        const response = await axios.get("https://campuslinker.onrender.com/api/v1/user/profile", {
           headers: {
             Authorization: `Bearer ${token}`
           }

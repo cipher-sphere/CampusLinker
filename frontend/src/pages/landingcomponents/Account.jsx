@@ -30,7 +30,8 @@ function Account() {
 
         if (isSignup) {
             try {
-                const res = await axios.post('http://localhost:5000/api/v1/user/signup', {
+                const res = await axios.post('https://campuslinker.onrender.com/api/v1/user/signup', {
+                // const res = await axios.post('http://localhost:5000/api/v1/user/signup', {
                     username,
                     password,
                     firstName,
@@ -53,7 +54,8 @@ function Account() {
             }
         } else {
             try {
-                const res = await axios.post('http://localhost:5000/api/v1/user/signin', {
+                // const res = await axios.post('http://localhost:5000/api/v1/user/signin', {
+                const res = await axios.post('https://campuslinker.onrender.com/api/v1/user/signin', {
                     username,
                     password
                 });
