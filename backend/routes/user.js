@@ -1,11 +1,12 @@
 import express from 'express';
 import { User } from "../db.js";
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs'; // ✅ Changed from 'bcrypt' to 'bcryptjs'
 import { authenticateToken } from '../middleware/auth.js';
+
 const router = express.Router();
-const secret ="cipher"; // Better to use environment variable
-const saltRounds = 10; // You can adjust the number of salt rounds
+const secret = "cipher"; // Consider using environment variables in production
+const saltRounds = 10;
 
 router.post("/signup", async (req, res) => {
     const { username, password, firstName, lastName, email, phoneNumber, rollNumber, department, yearOfStudy, dateOfBirth } = req.body;
@@ -34,12 +35,11 @@ router.post("/signup", async (req, res) => {
             }
         }
 
-        // Hash the password using bcrypt
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        const hashedPassword = await bcrypt.hash(password, saltRounds); // ✅ bcryptjs usage
 
         const user = new User({
             username,
-            password: hashedPassword, // Store the hashed password
+            password: hashedPassword,
             firstName,
             lastName,
             email,
@@ -49,15 +49,16 @@ router.post("/signup", async (req, res) => {
             yearOfStudy,
             dateOfBirth
         });
+
         const savedUser = await user.save();
         const token = jwt.sign({ userID: savedUser._id }, secret);
         res.json({
             message: "Signed Up",
             token,
             userID: savedUser._id
-        })
-    }
-    catch (error) {
+        });
+
+    } catch (error) {
         console.error("Signup error:", error);
         res.status(500).json({
             message: "Error creating user",
@@ -68,6 +69,7 @@ router.post("/signup", async (req, res) => {
 
 router.post("/signin", async (req, res) => {
     const { username, password } = req.body;
+
     try {
         const user = await User.findOne({ username });
         if (!user) {
@@ -75,8 +77,8 @@ router.post("/signin", async (req, res) => {
                 message: "User not found. Please sign up first."
             });
         }
-        
-        const passwordMatch = await bcrypt.compare(password, user.password);
+
+        const passwordMatch = await bcrypt.compare(password, user.password); // ✅ bcryptjs usage
         if (passwordMatch) {
             const token = jwt.sign({ userID: user._id }, secret);
             return res.json({
@@ -89,6 +91,7 @@ router.post("/signin", async (req, res) => {
                 message: "Incorrect password. Please try again."
             });
         }
+
     } catch (error) {
         console.error("Signin error:", error);
         res.status(500).json({
@@ -98,11 +101,9 @@ router.post("/signin", async (req, res) => {
     }
 });
 
-router.get("/profile",authenticateToken,async (req,res)=>{
+router.get("/profile", authenticateToken, async (req, res) => {
     const user = await User.findById(req.user.userID).select("-password");
-    res.json({
-        user
-    });
+    res.json({ user });
 });
 
 export default router;
