@@ -52,21 +52,21 @@ function Account() {
                 alert("Something went wrong");
             }
         } else {
-  try {
-    const res = await axios.post('http://localhost:5000/api/v1/user/signin', {
-      username,
-      password
-    });
-    console.log('Signin successful:', res.data);
-    // Store the token in localStorage or in context
-    localStorage.setItem('token', res.data.token);
-    // Navigate to dashboard or home page
-    navigate('/dashboard');
-  } catch (err) {
-    console.error('Signin failed:', err.response?.data || err.message);
-    alert("Invalid username or password");
-  }
-}
+            try {
+                const res = await axios.post('http://localhost:5000/api/v1/user/signin', {
+                    username,
+                    password
+                });
+                console.log('Signin successful:', res.data);
+                // Store the token in localStorage or in context
+                localStorage.setItem('token', res.data.token);
+                // Navigate to dashboard or home page
+                navigate('/dashboard');
+            } catch (err) {
+                console.error('Signin failed:', err.response?.data || err.message);
+                alert("Invalid username or password");
+            }
+        }
     };
 
     return (
@@ -96,7 +96,7 @@ function Account() {
                                 <p className="text-gray-600">
                                     {isSignup
                                         ? 'Get started with your free account today.'
-                                        : signupSuccess 
+                                        : signupSuccess
                                             ? 'Your account was created successfully! Please sign in.'
                                             : 'Log in to access your CampusLinker account.'}
                                 </p>
